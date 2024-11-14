@@ -49,8 +49,8 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Initialize EmailJS
-emailjs.init("yo7-HMUsMeyBLQv-n");  // Replace with your EmailJS public key
+// Initialize EmailJS with environment variables
+emailjs.init(process.env.EMAILJS_PUBLIC_KEY);  // Public key environment variable
 
 // Form Submission with EmailJS
 document.getElementById('contact-form').addEventListener('submit', function(event) {
@@ -69,9 +69,9 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     return;
   }
 
-  // EmailJS send function
+  // EmailJS send function using environment variables for sensitive data
   console.log("Attempting to send email...");
-  emailjs.send("lkwebsolutions", "template_Lkwebsolutions", {
+  emailjs.send(process.env.EMAILJS_SERVICE_ID, process.env.EMAILJS_TEMPLATE_ID, {
     name: name,
     email: email,
     message: message,
@@ -88,4 +88,4 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     responseEl.style.color = "red";
     responseEl.style.display = "block";
   });
-});  // Missing closing }); added here
+});
